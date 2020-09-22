@@ -1,0 +1,234 @@
+---
+title: "Analysis"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# options(width = 400)
+```
+
+## Loading, setting up
+
+```{r, load-packages, message = FALSE}
+library(tidyverse)
+library(lme4)
+
+d_to_model <- read_csv("d-to-model.csv")
+```
+
+# State-level descriptives
+
+```{r}
+distinct_states <- d_to_model %>% 
+  distinct(state, .keep_all = TRUE) %>% 
+  select(-user_id, -screen_name, -created_at)
+```
+
+## Descriptives
+
+```{r}
+distinct_states %>% 
+  select(n_tweets_at_state_level,
+         voices, 
+         national_school_lunch_program_fy_2016_fns_usda_gov,
+         pct_students_frpl, 
+         state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands,
+         state_spending_per_child,
+         urban_percentage_of_state_population_in_2015,
+         three_year_average_of_state_poverty_rates_2015_2017,
+         teacher_salaries_nea_2016,
+         c_ideology,
+         g_ideology,
+         region_by_census,
+         enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
+         staff_teachers,
+         coordinators_teachers
+  ) %>% 
+  skimr::skim()
+```
+
+## Correlations
+
+```{r}
+distinct_states %>% 
+  select(n_tweets_at_state_level,
+         voices, 
+         national_school_lunch_program_fy_2016_fns_usda_gov,
+         pct_students_frpl, 
+         state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands,
+         state_spending_per_child,
+         urban_percentage_of_state_population_in_2015,
+         three_year_average_of_state_poverty_rates_2015_2017,
+         teacher_salaries_nea_2016,
+         c_ideology,
+         g_ideology,
+         region_by_census,
+         enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
+         staff_teachers,
+         coordinators_teachers
+  ) %>% 
+  corrr::correlate() %>% 
+  corrr::shave() %>% 
+  corrr::fashion() 
+```
+
+## Analysis
+
+What stands out here for relating to `mean_n_tweets_by_user_in_state`?
+
+- Voices (unique users) matters a great deal
+- both ideology measures (congress and governor) seem to matter, but are highly correlated (r = .79)
+- free and reduced price lunch percentage seems important
+- teacher salaries
+
+## Some linear models
+
+```{r, state-level-models}
+m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
+                       scale(voices) + 
+                       scale(c_ideology) + 
+                       scale(g_ideology) + 
+                       scale(enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected) +
+                       scale(national_school_lunch_program_fy_2016_fns_usda_gov) +
+                       scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands),
+                       #scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) +
+                       #scale(urban_percentage_of_state_population_in_2015), 
+                     data = distinct_states, 
+                     family = "poisson")
+
+sjPlot::tab_model(m_state_level, show.std = "std2")
+sperformance::check_model(m_state_level)
+```
+
+What can we take away from these?
+
+**key takeaways predicting the number of tweets at the state level**
+- more voices mean more tweets
+- ideology matters a lot, with right leaning seeing greater activity
+
+**key takeaways from below**
+- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
+- those who have been on Twitter longer are more active
+- states with higher unemployment see more activity
+
+# Analysis - at the individual level 
+
+```{r}
+to_model <- to_model %>% 
+  mutate(years_on_twitter = 2020 - lubridate::year(to_model$account_created_at),
+         n_tweets_by_user = n)
+```
+
+## Model 1 - only the grouping structure (individuals nested in hashtags)
+
+```{r, model-1}
+m1 <- glmer(n_tweets ~ 1 + 
+              (1|hashtag), 
+            data = to_model,family = 'poisson')
+
+performance::icc(m1)
+sjPlot::tab_model(m1, show.std = TRUE)
+```
+
+voices, n_teachers, state_spending, unemployment, three_year_poverty_rates, c_ideology, favorite_count, years_on_twitter, pct_urban_in_state
+
+## Model 2 - with some user-level independent variables added
+
+```{r, model-2}
+m2 <- glmer(n_tweets ~ 1 + 
+              
+              # individual
+              #scale(favorite_count) +
+              scale(time_of_account) + 
+              
+              (1|hashtag), 
+            data = to_model, 
+            family = "poisson")
+
+performance::icc(m2)
+performance::r2(m2)
+sjPlot::tab_model(m2, show.std = TRUE)
+```
+
+favorite count not behaving nicely 
+
+What do we find?
+- people who have been on Twitter longer tweet more
+
+## Model 3 - state-level variables added
+
+
+```{r, model-3}
+m3 <- glmer(n_tweets ~ 1 + 
+              
+              # state-level
+              scale(c_ideology) + 
+              scale(pct_urban_in_state) + 
+              scale(three_year_poverty_rates) + 
+              
+              scale(voices) + scale(n_teachers) + scale(state_spending) + scale(unemployment) + 
+              
+              (1|hashtag), 
+            data = to_model, 
+            family = "poisson")
+
+performance::icc(m3)
+sjPlot::tab_model(m3, show.std = TRUE)
+```
+
+- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
+- n teachers does not matter, probably due to voices, REMOVE
+- unemployment matters, more unemployment, less activity
+- state_spending matters positively a bit, not sure
+
+## Model 4 - both sets of variables added
+
+```{r, model-4, eval = TRUE}
+m4 <- glmer(n_tweets ~ 1 + 
+              
+              # individual
+              #scale(favorite_count) +
+              scale(time_of_account) + 
+              
+              # state-level
+              scale(c_ideology) + 
+              scale(three_year_poverty_rates) + 
+              scale(pct_urban_in_state) +
+              
+              scale(voices) + scale(unemployment) + 
+              
+              scale(state_spending) + 
+              
+              
+              (1|hashtag), 
+            data = to_model, 
+            family = "poisson")
+
+performance::icc(m4)
+sjPlot::tab_model(m4, show.std = TRUE)
+```
+
+- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
+- those who have been on Twitter longer are more active
+- states with higher unemployment see more activity
+
+
+```{r}
+
+```
+
+# Takeaways
+
+**For predicting more users at the state level**:
+- Voices matter a great deal positively
+- Less urban, more right-leaning states with more users
+
+**For predicting how active users are**
+- How long someone has been on Twitter and how many Tweets they've posted seems to be associated with greater activity, though I think we need to talk and think through the logic of these
+- Poorer, more right-leaning states are associated with more activity
