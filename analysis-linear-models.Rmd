@@ -48,6 +48,10 @@ distinct_states %>%
          g_ideology,
          region_by_census,
          enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
+         full_time_equivalent_fte_teachers_state_2015_16,
+         full_time_equivalent_fte_staff_state_2015_16,
+         pct_students_frpl,
+         total_students_state_2015_16,
          staff_teachers,
          coordinators_teachers
   ) %>% 
@@ -71,6 +75,10 @@ distinct_states %>%
          g_ideology,
          region_by_census,
          enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
+         full_time_equivalent_fte_teachers_state_2015_16,
+         full_time_equivalent_fte_staff_state_2015_16,
+         pct_students_frpl,
+         total_students_state_2015_16,
          staff_teachers,
          coordinators_teachers
   ) %>% 
@@ -92,14 +100,21 @@ What stands out here for relating to `mean_n_tweets_by_user_in_state`?
 
 ```{r, state-level-models}
 m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
+                       
                        scale(voices) + 
+                       
                        scale(c_ideology) + 
                        scale(g_ideology) + 
-                       scale(enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected) +
-                       scale(national_school_lunch_program_fy_2016_fns_usda_gov) +
-                       scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands),
-                       #scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) +
-                       #scale(urban_percentage_of_state_population_in_2015), 
+                       
+                       three_year_average_of_state_poverty_rates_2015_2017 +
+                       pct_students_frpl +
+                       
+                       state_spending_per_child +
+                       total_students_state_2015_16 +
+                       
+                       full_time_equivalent_fte_teachers_state_2015_16 +
+                       
+                       scale(urban_percentage_of_state_population_in_2015), 
                      data = distinct_states, 
                      family = "poisson")
 

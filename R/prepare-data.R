@@ -1,8 +1,14 @@
-prepare_data <- function(d, key, state_level_vars, new_state_level_vars) {
+prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_data) {
   
   new_state_level_vars <- new_state_level_vars %>% 
     mutate(state = tolower(state),
            state = tools::toTitleCase(state))
+  
+  nces_data <- nces_data %>% 
+    mutate(state = tolower(state_name),
+           state = tools::toTitleCase(state)) %>% 
+    select(-state_name) %>% 
+    select(state, everything())
   
   d_long <- d %>% 
     unnest(hashtags)
@@ -14,7 +20,8 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars) {
   # joining state-level vars
   
   state_level_vars_combined <- state_level_vars %>% 
-    left_join(new_state_level_vars, by = "state")
+    left_join(new_state_level_vars, by = "state") %>% 
+    left_join(nces_data)
   
   # joining all data
   
@@ -49,10 +56,10 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars) {
   # creating new variables
   
   d_to_model <- d_to_model %>%
-    mutate(pct_students_frpl = national_school_lunch_program_fy_2016_fns_usda_gov / 
-             enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
-           state_spending_per_child = state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands /
-             enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected)
+    mutate(pct_students_frpl = as.integer(free_and_reduced_lunch_students_public_school_2015_16) / 
+             as.integer(total_students_state_2015_16),
+           state_spending_per_child = as.numeric(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) /
+             as.integer(total_students_state_2015_16))
   
   n_tweets_at_state_level <- d_to_model %>% 
     count(state) %>% 

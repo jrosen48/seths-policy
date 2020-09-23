@@ -14,7 +14,10 @@ the_plan <-
     new_state_level_vars = read_excel(file_in("data-raw/TwitterTeachersData.xlsx")) %>% 
       janitor::clean_names(),
     
-    d_to_model = prepare_data(d, key, state_level_vars, new_state_level_vars),
+    nces_data = read_csv(file_in("data-raw/ELSI_csv_export_6373645497929597249073.csv"), na = "‡", skip = 6) %>% 
+      janitor::clean_names(),
+    
+    d_to_model = prepare_data(d, key, state_level_vars, new_state_level_vars, nces_data),
     
     linear_models = rmarkdown::render(
       knitr_in("analysis-linear-models.Rmd"),
