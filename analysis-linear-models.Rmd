@@ -6,6 +6,8 @@ output:
     toc_float: yes
   pdf_document:
     toc: yes
+params:
+  d_to_model: ""
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lme4)
 
-d_to_model <- read_csv("data/d-to-model.csv")
+d_to_model <- params$d_to_model
 ```
 
 # State-level descriptives
@@ -102,7 +104,7 @@ m_state_level <- glm(n_tweets_at_state_level ~ 1 +
                      family = "poisson")
 
 sjPlot::tab_model(m_state_level, show.std = "std2")
-sperformance::check_model(m_state_level)
+performance::check_model(m_state_level)
 ```
 
 What can we take away from these?

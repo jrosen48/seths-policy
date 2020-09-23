@@ -14,20 +14,15 @@ the_plan <-
     new_state_level_vars = read_excel(file_in("data-raw/TwitterTeachersData.xlsx")) %>% 
       janitor::clean_names(),
     
-    written_prepared_data_as_csv = rmarkdown::render(
-      knitr_in("prepare-data.Rmd"),
-      output_file = file_out("docs/prepare-data.html"),
-      params = list(d = d,
-                    key = key,
-                    state_level_vars = state_level_vars,
-                    new_state_level_vars = new_state_level_vars)),
+    d_to_model = prepare_data(d, key, state_level_vars, new_state_level_vars),
     
     linear_models = rmarkdown::render(
       knitr_in("analysis-linear-models.Rmd"),
-      output_file = file_out("docs/analysis-linear-models.html")),
+      output_file = file_out("docs/analysis-linear-models.html"),
+      params = list(d_to_model = d_to_model)),
     
     # multi_level_models = rmarkdown::render(
     #   knitr_in("analysis-multi-level-models.Rmd"),
     #   output_file = file_out("docs/analysis-linear-models.html")),
     
-)
+  )
