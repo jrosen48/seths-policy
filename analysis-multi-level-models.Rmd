@@ -15,16 +15,13 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ## Loading, setting up
 
 ```{r, load-packages, message = FALSE}
-library(tidyverse)
-library(lme4)
-
 d_to_model <- read_csv("data/d-to-model.csv")
 ```
 
 ## Descriptives
 
 ```{r}
-d %>% 
+d_to_model %>% 
   select(n_tweets_at_state_level,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
@@ -47,7 +44,7 @@ d %>%
 ## Correlations
 
 ```{r}
-d %>% 
+d_to_model %>% 
   select(n_tweets_at_state_level,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
@@ -71,76 +68,6 @@ d %>%
 
 # Analysis - at the individual level 
 
-```{r}
-to_model <- to_model %>% 
-  mutate(years_on_twitter = 2020 - lubridate::year(to_model$account_created_at),
-         n_tweets_by_user = n)
-```
-
-## Model 1 - only the grouping structure (individuals nested in hashtags)
-
-```{r, model-1}
-m1 <- glmer(n_tweets ~ 1 + 
-              (1|hashtag), 
-            data = to_model,family = 'poisson')
-
-performance::icc(m1)
-sjPlot::tab_model(m1, show.std = TRUE)
-```
-
-voices, n_teachers, state_spending, unemployment, three_year_poverty_rates, c_ideology, favorite_count, years_on_twitter, pct_urban_in_state
-
-## Model 2 - with some user-level independent variables added
-
-```{r, model-2}
-m2 <- glmer(n_tweets ~ 1 + 
-              
-              # individual
-              #scale(favorite_count) +
-              scale(time_of_account) + 
-              
-              (1|hashtag), 
-            data = to_model, 
-            family = "poisson")
-
-performance::icc(m2)
-performance::r2(m2)
-sjPlot::tab_model(m2, show.std = TRUE)
-```
-
-favorite count not behaving nicely 
-
-What do we find?
-- people who have been on Twitter longer tweet more
-
-## Model 3 - state-level variables added
-
-
-```{r, model-3}
-m3 <- glmer(n_tweets ~ 1 + 
-              
-              # state-level
-              scale(c_ideology) + 
-              scale(pct_urban_in_state) + 
-              scale(three_year_poverty_rates) + 
-              
-              scale(voices) + scale(n_teachers) + scale(state_spending) + scale(unemployment) + 
-              
-              (1|hashtag), 
-            data = to_model, 
-            family = "poisson")
-
-performance::icc(m3)
-sjPlot::tab_model(m3, show.std = TRUE)
-```
-
-- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
-- n teachers does not matter, probably due to voices, REMOVE
-- unemployment matters, more unemployment, less activity
-- state_spending matters positively a bit, not sure
-
-## Model 4 - both sets of variables added
-
 ```{r, model-4, eval = TRUE}
 m4 <- glmer(n_tweets ~ 1 + 
               
@@ -159,7 +86,7 @@ m4 <- glmer(n_tweets ~ 1 +
               
               
               (1|hashtag), 
-            data = to_model, 
+            data = d_to_model,
             family = "poisson")
 
 performance::icc(m4)
@@ -169,11 +96,6 @@ sjPlot::tab_model(m4, show.std = TRUE)
 - ideology, poverty matter, with poorer, more right-leaning states seeing more activity
 - those who have been on Twitter longer are more active
 - states with higher unemployment see more activity
-
-
-```{r}
-
-```
 
 # Takeaways
 

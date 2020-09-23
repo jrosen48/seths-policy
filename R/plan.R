@@ -26,8 +26,8 @@ the_plan <-
       knitr_in("analysis-linear-models.Rmd"),
       output_file = file_out("docs/analysis-linear-models.html")),
     
-    multi_level_models = rmarkdown::render(
-      knitr_in("analysis-multi-level-models.Rmd"),
-      output_file = file_out("docs/analysis-linear-models.html")),
+    # multi_level_models = rmarkdown::render(
+    #   knitr_in("analysis-multi-level-models.Rmd"),
+    #   output_file = file_out("docs/analysis-linear-models.html")),
     
 )
