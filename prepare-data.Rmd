@@ -1,3 +1,21 @@
+---
+title: "Analysis"
+output: html_document
+params:
+  d: ""
+  key: ""
+  state_level_vars: ""
+  new_state_level_vars: ""
+---
+
+```{r, renaming params}
+d <- params$d
+key <- params$key
+state_level_vars <- params$state_level_vars
+new_state_level_vars <- params$new_state_level_vars
+```
+
+```{r }
 # loading data
 
 # processing data
@@ -41,7 +59,7 @@ d_long <- d_long %>%
 # selecting only certain variables to include to make this file easier to work with 
 
 d_long <- d_long %>% 
-  select(user_id, screen_name, created_at, hashtag = hashtags, state_abbre:n_tweets_by_user_in_state)
+  select(user_id, screen_name, created_at, hashtag = hashtags, state_abbre:time_of_account)
 
 # filtering data to only include those from one of our 47 states (so filtering cases associated with hashtags not in the key)
 
@@ -73,4 +91,5 @@ d_to_model <- d_to_model %>%
 d_to_model <- d_to_model %>% 
   select(-n)
 
-write_csv(d_to_model, "d-to-model.csv")
+write_csv(d_to_model, "data/d-to-model.csv")
+```

@@ -1,0 +1,15 @@
+name: SETHs Policy
+output_dir: '.'
+navbar:
+  title: SETHs Policy
+  left:
+  - text: Home
+    href: index.html
+  - text: Prepare Data
+    href: prepare-data.html
+  - text: Analysis - Linear Models
+    href: analysis-linear-models.html
+  - text: Analysis - Multi-Level Models
+    href: analysis-multi-level-models.html
+output:
+  html_document:

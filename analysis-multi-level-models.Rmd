@@ -1,5 +1,5 @@
 ---
-title: "Analysis"
+title: "Analysis Multi-Level Models"
 output:
   html_document:
     toc: yes
@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 ## Loading, setting up
@@ -21,18 +21,10 @@ library(lme4)
 d_to_model <- read_csv("data/d-to-model.csv")
 ```
 
-# State-level descriptives
-
-```{r}
-distinct_states <- d_to_model %>% 
-  distinct(state, .keep_all = TRUE) %>% 
-  select(-user_id, -screen_name, -created_at)
-```
-
 ## Descriptives
 
 ```{r}
-distinct_states %>% 
+d %>% 
   select(n_tweets_at_state_level,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
@@ -55,7 +47,7 @@ distinct_states %>%
 ## Correlations
 
 ```{r}
-distinct_states %>% 
+d %>% 
   select(n_tweets_at_state_level,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
@@ -76,45 +68,6 @@ distinct_states %>%
   corrr::shave() %>% 
   corrr::fashion() 
 ```
-
-## Analysis
-
-What stands out here for relating to `mean_n_tweets_by_user_in_state`?
-
-- Voices (unique users) matters a great deal
-- both ideology measures (congress and governor) seem to matter, but are highly correlated (r = .79)
-- free and reduced price lunch percentage seems important
-- teacher salaries
-
-## Some linear models
-
-```{r, state-level-models}
-m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
-                       scale(voices) + 
-                       scale(c_ideology) + 
-                       scale(g_ideology) + 
-                       scale(enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected) +
-                       scale(national_school_lunch_program_fy_2016_fns_usda_gov) +
-                       scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands),
-                       #scale(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) +
-                       #scale(urban_percentage_of_state_population_in_2015), 
-                     data = distinct_states, 
-                     family = "poisson")
-
-sjPlot::tab_model(m_state_level, show.std = "std2")
-sperformance::check_model(m_state_level)
-```
-
-What can we take away from these?
-
-**key takeaways predicting the number of tweets at the state level**
-- more voices mean more tweets
-- ideology matters a lot, with right leaning seeing greater activity
-
-**key takeaways from below**
-- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
-- those who have been on Twitter longer are more active
-- states with higher unemployment see more activity
 
 # Analysis - at the individual level 
 
