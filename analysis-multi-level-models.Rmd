@@ -4,25 +4,25 @@ output:
   html_document:
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
+params:
+  d_to_model: ""
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Loading, setting up
 
 ```{r, load-packages, message = FALSE}
-d_to_model <- read_csv("data/d-to-model.csv")
+d_to_model <- params$d_to_model
 ```
 
 ## Descriptives
 
 ```{r}
 d_to_model %>% 
-  select(n_tweets_at_state_level,
+  select(n_tweets_by_user_in_state,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
          pct_students_frpl, 
@@ -36,7 +36,8 @@ d_to_model %>%
          region_by_census,
          enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
          staff_teachers,
-         coordinators_teachers
+         coordinators_teachers,
+         time_of_account
   ) %>% 
   skimr::skim()
 ```
@@ -45,7 +46,7 @@ d_to_model %>%
 
 ```{r}
 d_to_model %>% 
-  select(n_tweets_at_state_level,
+  select(n_tweets_by_user_in_state,
          voices, 
          national_school_lunch_program_fy_2016_fns_usda_gov,
          pct_students_frpl, 
@@ -59,9 +60,11 @@ d_to_model %>%
          region_by_census,
          enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
          staff_teachers,
-         coordinators_teachers
+         coordinators_teachers,
+         time_of_account
   ) %>% 
   corrr::correlate() %>% 
+  arrange(desc(n_tweets_by_user_in_state)) %>% 
   corrr::shave() %>% 
   corrr::fashion() 
 ```
@@ -69,21 +72,24 @@ d_to_model %>%
 # Analysis - at the individual level 
 
 ```{r, model-4, eval = TRUE}
-m4 <- glmer(n_tweets ~ 1 + 
+m4 <- glmer(n_tweets_by_user_in_state ~ 1 + 
               
-              # individual
-              #scale(favorite_count) +
-              scale(time_of_account) + 
+              scale(time_of_account)+
               
-              # state-level
+              scale(voices) + 
+              
               scale(c_ideology) + 
-              scale(three_year_poverty_rates) + 
-              scale(pct_urban_in_state) +
+              scale(g_ideology) + 
               
-              scale(voices) + scale(unemployment) + 
+              three_year_average_of_state_poverty_rates_2015_2017 +
+              pct_students_frpl +
               
-              scale(state_spending) + 
+              state_spending_per_child +
+              total_students_state_2015_16 +
               
+              full_time_equivalent_fte_teachers_state_2015_16 +
+              
+              scale(urban_percentage_of_state_population_in_2015) + 
               
               (1|hashtag), 
             data = d_to_model,
@@ -92,17 +98,3 @@ m4 <- glmer(n_tweets ~ 1 +
 performance::icc(m4)
 sjPlot::tab_model(m4, show.std = TRUE)
 ```
-
-- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
-- those who have been on Twitter longer are more active
-- states with higher unemployment see more activity
-
-# Takeaways
-
-**For predicting more users at the state level**:
-- Voices matter a great deal positively
-- Less urban, more right-leaning states with more users
-
-**For predicting how active users are**
-- How long someone has been on Twitter and how many Tweets they've posted seems to be associated with greater activity, though I think we need to talk and think through the logic of these
-- Poorer, more right-leaning states are associated with more activity

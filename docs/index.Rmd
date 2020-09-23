@@ -1,5 +1,5 @@
 ---
-title: "Index"
+title: "SETHs Policy"
 output: html_document
 ---
 
@@ -7,3 +7,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Spencer Greenhalgh, Joshua Rosenberg, Annelise Russell
+
+Repository: https://github.com/jrosen48/seths-policy
+
+This work is supported by the Southeastern Conference Visiting Faculty Travel Grant Program

@@ -4,8 +4,6 @@ output:
   html_document:
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
 params:
   d_to_model: ""
 ---
@@ -17,9 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Loading, setting up
 
 ```{r, load-packages, message = FALSE}
-library(tidyverse)
-library(lme4)
-
 d_to_model <- params$d_to_model
 ```
 
@@ -83,6 +78,7 @@ distinct_states %>%
          coordinators_teachers
   ) %>% 
   corrr::correlate() %>% 
+  arrange(desc(n_tweets_at_state_level)) %>% 
   corrr::shave() %>% 
   corrr::fashion() %>% 
   knitr::kable()
