@@ -5,8 +5,6 @@ navbar:
   left:
   - text: Home
     href: index.html
-  - text: Prepare Data
-    href: prepare-data.html
   - text: Analysis - Linear Models
     href: analysis-linear-models.html
   - text: Analysis - Multi-Level Models
