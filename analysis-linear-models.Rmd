@@ -84,7 +84,8 @@ distinct_states %>%
   ) %>% 
   corrr::correlate() %>% 
   corrr::shave() %>% 
-  corrr::fashion() 
+  corrr::fashion() %>% 
+  knitr::kable()
 ```
 
 ## Analysis
