@@ -70,31 +70,64 @@ d_to_model %>%
   knitr::kable()
 ```
 
+```{r}
+d_user_level <- d_to_model %>% 
+  distinct(screen_name, .keep_all = TRUE)
+```
+
 # Analysis - at the individual level 
 
-```{r, model-4, eval = TRUE}
-m4 <- glmer(n_tweets_by_user_in_state ~ 1 + 
+```{r, model-null, eval = TRUE}
+mnull <- glmer(n_tweets_by_user_in_state ~ 1 + 
               
-              scale(time_of_account)+
+              #scale(time_of_account)+
               
-              scale(voices) + 
+              #scale(voices) + 
               
-              scale(c_ideology) + 
+              #scale(c_ideology) + 
               #scale(g_ideology) + 
               
               #three_year_average_of_state_poverty_rates_2015_2017 +
-              pct_students_frpl +
+              #fct_students_frpl +
               
-              state_spending_per_child +
-              total_students_state_2015_16 +
+              #state_spending_per_child +
+              #total_students_state_2015_16 +
               
-              full_time_equivalent_fte_teachers_state_2015_16 +
+              #full_time_equivalent_fte_teachers_state_2015_16 +
               #scale(urban_percentage_of_state_population_in_2015) + 
               
-              (1|hashtag), 
-            data = d_to_model,
+              (1|state), 
+            data = d_user_level,
             family = "poisson")
 
-performance::icc(m4)
-sjPlot::tab_model(m4, show.std = TRUE)
+performance::icc(mnull)
+sjPlot::tab_model(mnull)
+```
+
+```{r, model-1, eval = TRUE}
+m1 <- glmer(n_tweets_by_user_in_state ~ 1 + 
+              
+              scale(time_of_account)+
+
+              scale(voices) +
+
+              scale(c_ideology) +
+              scale(g_ideology) +
+
+              scale(three_year_average_of_state_poverty_rates_2015_2017) +
+              scale(pct_students_frpl) +
+
+              scale(state_spending_per_child) +
+              scale(total_students_state_2015_16) +
+
+              scale(full_time_equivalent_fte_teachers_state_2015_16) +
+              scale(urban_percentage_of_state_population_in_2015) +
+              
+              (1|state), 
+            data = d_user_level,
+            family = "poisson")
+
+performance::icc(m1)
+sjPlot::tab_model(m1)
+performance::check_model(m1)
 ```
