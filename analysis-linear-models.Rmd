@@ -100,6 +100,8 @@ m_state_level <- glm(n_tweets_at_state_level ~ 1 +
                        
                        scale(voices) + 
                        
+                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
+                       
                        scale(c_ideology) + 
                        scale(g_ideology) + 
                        
@@ -107,11 +109,7 @@ m_state_level <- glm(n_tweets_at_state_level ~ 1 +
                        pct_students_frpl +
                        
                        state_spending_per_child +
-                       total_students_state_2015_16 +
-                       
-                       full_time_equivalent_fte_teachers_state_2015_16 +
-                       
-                       scale(urban_percentage_of_state_population_in_2015), 
+                       total_students_state_2015_166,
                      data = distinct_states, 
                      family = "poisson")
 

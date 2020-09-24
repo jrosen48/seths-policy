@@ -59,7 +59,9 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
     mutate(pct_students_frpl = as.integer(free_and_reduced_lunch_students_public_school_2015_16) / 
              as.integer(total_students_state_2015_16),
            state_spending_per_child = as.numeric(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) /
-             as.integer(total_students_state_2015_16))
+             as.integer(total_students_state_2015_16),
+           teacher_student_ratio = state_data$total_students_state_2015_16 / 
+             state_data$full_time_equivalent_fte_teachers_state_2015_16)
   
   n_tweets_at_state_level <- d_to_model %>% 
     count(state) %>% 

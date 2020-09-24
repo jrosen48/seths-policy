@@ -5,7 +5,7 @@ the_plan <-
       janitor::clean_names() %>% 
       as_tibble(),
     
-    key = read_csv(file_in("data-raw/summary_data.txt")) %>% 
+    key = read_csv(file_in("data-raw/summary_data.csv")) %>% 
       janitor::clean_names(),
     
     state_level_vars = readxl::read_xlsx(file_in("data-raw/TeachersonTwitter.xlsx")) %>% 
