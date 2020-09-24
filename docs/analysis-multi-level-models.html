@@ -1840,163 +1840,359 @@ div.tocify {
   corrr::correlate() %&gt;% 
   arrange(desc(n_tweets_by_user_in_state)) %&gt;% 
   corrr::shave() %&gt;% 
-  corrr::fashion() </code></pre>
+  corrr::fashion() %&gt;% 
+  knitr::kable()</code></pre>
 <pre><code>## 
 ## Correlation method: &#39;pearson&#39;
 ## Missing treated using: &#39;pairwise.complete.obs&#39;</code></pre>
-<pre><code>##                                                                               rowname
-## 1                                 three_year_average_of_state_poverty_rates_2015_2017
-## 2                                                                   pct_students_frpl
-## 3                                                                    region_by_census
-## 4                                                                     time_of_account
-## 5                                                                              voices
-## 6                                                                      staff_teachers
-## 7                                                               coordinators_teachers
-## 8                                        urban_percentage_of_state_population_in_2015
-## 9                                                            state_spending_per_child
-## 10                                 national_school_lunch_program_fy_2016_fns_usda_gov
-## 11      enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected
-## 12 state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands
-## 13                                                                         g_ideology
-## 14                                                          teacher_salaries_nea_2016
-## 15                                                                         c_ideology
-## 16                                                          n_tweets_by_user_in_state
-##    n_tweets_by_user_in_state voices
-## 1                        .08       
-## 2                        .05    .54
-## 3                        .03    .13
-## 4                        .01   -.02
-## 5                       -.01       
-## 6                       -.02   -.16
-## 7                       -.08   -.20
-## 8                       -.10    .02
-## 9                       -.12   -.31
-## 10                      -.13    .39
-## 11                      -.14    .37
-## 12                      -.16    .32
-## 13                      -.18   -.03
-## 14                      -.19   -.05
-## 15                      -.22   -.19
-## 16                             -.01
-##    national_school_lunch_program_fy_2016_fns_usda_gov pct_students_frpl
-## 1                                                                      
-## 2                                                                      
-## 3                                                 .32                  
-## 4                                                 .01              -.04
-## 5                                                 .39               .54
-## 6                                                 .08              -.21
-## 7                                                 .27              -.23
-## 8                                                 .52              -.10
-## 9                                                -.01              -.59
-## 10                                                                  .40
-## 11                                                .99               .37
-## 12                                                .94               .26
-## 13                                                .17              -.18
-## 14                                                .37              -.27
-## 15                                                .25              -.37
-## 16                                               -.13               .05
-##    state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands
-## 1                                                                                    
-## 2                                                                                    
-## 3                                                                                    
-## 4                                                                                    
-## 5                                                                                 .32
-## 6                                                                                 .11
-## 7                                                                                 .41
-## 8                                                                                 .63
-## 9                                                                                 .22
-## 10                                                                                .94
-## 11                                                                                .97
-## 12                                                                                   
-## 13                                                                                .41
-## 14                                                                                .61
-## 15                                                                                .42
-## 16                                                                               -.16
-##    state_spending_per_child urban_percentage_of_state_population_in_2015
-## 1                                                                       
-## 2                                                                       
-## 3                                                                       
-## 4                                                                       
-## 5                                                                       
-## 6                       .11                                             
-## 7                       .21                                          .41
-## 8                       .33                                             
-## 9                                                                    .33
-## 10                     -.01                                          .52
-## 11                      .02                                          .56
-## 12                      .22                                          .63
-## 13                      .56                                          .45
-## 14                      .68                                          .67
-## 15                      .60                                          .52
-## 16                     -.12                                         -.10
-##    three_year_average_of_state_poverty_rates_2015_2017
-## 1                                                     
-## 2                                                     
-## 3                                                     
-## 4                                                     
-## 5                                                     
-## 6                                                     
-## 7                                                     
-## 8                                                 -.24
-## 9                                                 -.46
-## 10                                                 .33
-## 11                                                 .30
-## 12                                                 .21
-## 13                                                -.36
-## 14                                                -.29
-## 15                                                -.29
-## 16                                                 .08
-##    teacher_salaries_nea_2016 c_ideology g_ideology region_by_census
-## 1                                                                  
-## 2                                                                  
-## 3                                                                  
-## 4                                                                  
-## 5                                                                  
-## 6                                                                  
-## 7                                                                  
-## 8                                                                  
-## 9                        .68                                       
-## 10                       .37        .25                            
-## 11                       .46        .30        .26                 
-## 12                       .61        .42        .41              .21
-## 13                       .76        .72                        -.20
-## 14                                  .80        .76             -.18
-## 15                       .80                   .72             -.43
-## 16                      -.19       -.22       -.18              .03
-##    enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected
-## 1                                                                               
-## 2                                                                               
-## 3                                                                               
-## 4                                                                               
-## 5                                                                               
-## 6                                                                               
-## 7                                                                               
-## 8                                                                               
-## 9                                                                               
-## 10                                                                              
-## 11                                                                              
-## 12                                                                              
-## 13                                                                           .26
-## 14                                                                           .46
-## 15                                                                           .30
-## 16                                                                          -.14
-##    staff_teachers coordinators_teachers time_of_account
-## 1                                                      
-## 2                                                      
-## 3                                                      
-## 4                                                      
-## 5                                                      
-## 6                                                      
-## 7                                                      
-## 8                                                      
-## 9                                                      
-## 10                                                     
-## 11                                                     
-## 12                                                     
-## 13                                                     
-## 14            .15                                      
-## 15            .04                   .26                
-## 16           -.02                  -.08             .01</code></pre>
+<table>
+<colgroup>
+<col width="14%"></col>
+<col width="4%"></col>
+<col width="1%"></col>
+<col width="8%"></col>
+<col width="3%"></col>
+<col width="14%"></col>
+<col width="4%"></col>
+<col width="7%"></col>
+<col width="8%"></col>
+<col width="4%"></col>
+<col width="1%"></col>
+<col width="1%"></col>
+<col width="2%"></col>
+<col width="13%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">rowname</th>
+<th align="left">n_tweets_by_user_in_state</th>
+<th align="left">voices</th>
+<th align="left">national_school_lunch_program_fy_2016_fns_usda_gov</th>
+<th align="left">pct_students_frpl</th>
+<th align="left">state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands</th>
+<th align="left">state_spending_per_child</th>
+<th align="left">urban_percentage_of_state_population_in_2015</th>
+<th align="left">three_year_average_of_state_poverty_rates_2015_2017</th>
+<th align="left">teacher_salaries_nea_2016</th>
+<th align="left">c_ideology</th>
+<th align="left">g_ideology</th>
+<th align="left">region_by_census</th>
+<th align="left">enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected</th>
+<th align="left">staff_teachers</th>
+<th align="left">coordinators_teachers</th>
+<th align="left">time_of_account</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">three_year_average_of_state_poverty_rates_2015_2017</td>
+<td align="left">.08</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">pct_students_frpl</td>
+<td align="left">.05</td>
+<td align="left">.54</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">region_by_census</td>
+<td align="left">.03</td>
+<td align="left">.13</td>
+<td align="left">.32</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">time_of_account</td>
+<td align="left">.01</td>
+<td align="left">-.02</td>
+<td align="left">.01</td>
+<td align="left">-.04</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">voices</td>
+<td align="left">-.01</td>
+<td align="left"></td>
+<td align="left">.39</td>
+<td align="left">.54</td>
+<td align="left">.32</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">staff_teachers</td>
+<td align="left">-.02</td>
+<td align="left">-.16</td>
+<td align="left">.08</td>
+<td align="left">-.21</td>
+<td align="left">.11</td>
+<td align="left">.11</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">coordinators_teachers</td>
+<td align="left">-.08</td>
+<td align="left">-.20</td>
+<td align="left">.27</td>
+<td align="left">-.23</td>
+<td align="left">.41</td>
+<td align="left">.21</td>
+<td align="left">.41</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">urban_percentage_of_state_population_in_2015</td>
+<td align="left">-.10</td>
+<td align="left">.02</td>
+<td align="left">.52</td>
+<td align="left">-.10</td>
+<td align="left">.63</td>
+<td align="left">.33</td>
+<td align="left"></td>
+<td align="left">-.24</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">state_spending_per_child</td>
+<td align="left">-.12</td>
+<td align="left">-.31</td>
+<td align="left">-.01</td>
+<td align="left">-.59</td>
+<td align="left">.22</td>
+<td align="left"></td>
+<td align="left">.33</td>
+<td align="left">-.46</td>
+<td align="left">.68</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">national_school_lunch_program_fy_2016_fns_usda_gov</td>
+<td align="left">-.13</td>
+<td align="left">.39</td>
+<td align="left"></td>
+<td align="left">.40</td>
+<td align="left">.94</td>
+<td align="left">-.01</td>
+<td align="left">.52</td>
+<td align="left">.33</td>
+<td align="left">.37</td>
+<td align="left">.25</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected</td>
+<td align="left">-.14</td>
+<td align="left">.37</td>
+<td align="left">.99</td>
+<td align="left">.37</td>
+<td align="left">.97</td>
+<td align="left">.02</td>
+<td align="left">.56</td>
+<td align="left">.30</td>
+<td align="left">.46</td>
+<td align="left">.30</td>
+<td align="left">.26</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands</td>
+<td align="left">-.16</td>
+<td align="left">.32</td>
+<td align="left">.94</td>
+<td align="left">.26</td>
+<td align="left"></td>
+<td align="left">.22</td>
+<td align="left">.63</td>
+<td align="left">.21</td>
+<td align="left">.61</td>
+<td align="left">.42</td>
+<td align="left">.41</td>
+<td align="left">.21</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">g_ideology</td>
+<td align="left">-.18</td>
+<td align="left">-.03</td>
+<td align="left">.17</td>
+<td align="left">-.18</td>
+<td align="left">.41</td>
+<td align="left">.56</td>
+<td align="left">.45</td>
+<td align="left">-.36</td>
+<td align="left">.76</td>
+<td align="left">.72</td>
+<td align="left"></td>
+<td align="left">-.20</td>
+<td align="left">.26</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">teacher_salaries_nea_2016</td>
+<td align="left">-.19</td>
+<td align="left">-.05</td>
+<td align="left">.37</td>
+<td align="left">-.27</td>
+<td align="left">.61</td>
+<td align="left">.68</td>
+<td align="left">.67</td>
+<td align="left">-.29</td>
+<td align="left"></td>
+<td align="left">.80</td>
+<td align="left">.76</td>
+<td align="left">-.18</td>
+<td align="left">.46</td>
+<td align="left">.15</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">c_ideology</td>
+<td align="left">-.22</td>
+<td align="left">-.19</td>
+<td align="left">.25</td>
+<td align="left">-.37</td>
+<td align="left">.42</td>
+<td align="left">.60</td>
+<td align="left">.52</td>
+<td align="left">-.29</td>
+<td align="left">.80</td>
+<td align="left"></td>
+<td align="left">.72</td>
+<td align="left">-.43</td>
+<td align="left">.30</td>
+<td align="left">.04</td>
+<td align="left">.26</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">n_tweets_by_user_in_state</td>
+<td align="left"></td>
+<td align="left">-.01</td>
+<td align="left">-.13</td>
+<td align="left">.05</td>
+<td align="left">-.16</td>
+<td align="left">-.12</td>
+<td align="left">-.10</td>
+<td align="left">.08</td>
+<td align="left">-.19</td>
+<td align="left">-.22</td>
+<td align="left">-.18</td>
+<td align="left">.03</td>
+<td align="left">-.14</td>
+<td align="left">-.02</td>
+<td align="left">-.08</td>
+<td align="left">.01</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="analysis---at-the-individual-level" class="section level1">
 <h1>Analysis - at the individual level</h1>
@@ -2007,17 +2203,16 @@ div.tocify {
               scale(voices) + 
               
               scale(c_ideology) + 
-              scale(g_ideology) + 
+              #scale(g_ideology) + 
               
-              three_year_average_of_state_poverty_rates_2015_2017 +
+              #three_year_average_of_state_poverty_rates_2015_2017 +
               pct_students_frpl +
               
               state_spending_per_child +
               total_students_state_2015_16 +
               
               full_time_equivalent_fte_teachers_state_2015_16 +
-              
-              scale(urban_percentage_of_state_population_in_2015) + 
+              #scale(urban_percentage_of_state_population_in_2015) + 
               
               (1|hashtag), 
             data = d_to_model,
@@ -2025,7 +2220,7 @@ div.tocify {
 <pre><code>## Warning: Some predictor variables are on very different scales: consider
 ## rescaling</code></pre>
 <pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
-## Model failed to converge with max|grad| = 0.0745058 (tol = 0.002, component 1)</code></pre>
+## Model failed to converge with max|grad| = 0.0557303 (tol = 0.002, component 1)</code></pre>
 <pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
 ##  - Rescale variables?;Model is nearly unidentifiable: large eigenvalue ratio
 ##  - Rescale variables?</code></pre>
@@ -2034,8 +2229,8 @@ div.tocify {
 ## Model failed to converge with max|grad| = 0.00238862 (tol = 0.002, component 1)</code></pre>
 <pre><code>## # Intraclass Correlation Coefficient
 ## 
-##      Adjusted ICC: 0.986
-##   Conditional ICC: 0.851</code></pre>
+##      Adjusted ICC: 0.987
+##   Conditional ICC: 0.842</code></pre>
 <pre class="r"><code>sjPlot::tab_model(m4, show.std = TRUE)</code></pre>
 <pre><code>## Warning in checkConv(attr(opt, &quot;derivs&quot;), opt$par, ctrl = control$checkConv, :
 ## unable to evaluate scaled gradient</code></pre>
@@ -2091,16 +2286,16 @@ p
 (Intercept)
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-309.36
+405.38
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-4.76
+4.73
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-287.68 – 332.66
+372.34 – 441.37
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-4.34 – 5.18
+4.30 – 5.17
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001
@@ -2131,16 +2326,16 @@ time_of_account
 voices
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.28
+1.26
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.25
+0.23
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.19 – 1.38
+1.16 – 1.37
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.15 – 0.65
+-0.17 – 0.64
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001
@@ -2151,59 +2346,19 @@ voices
 c_ideology
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.78
+0.68
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.25
+-0.37
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.71 – 0.85
+0.62 – 0.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.71 – 0.22
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-g_ideology
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.79
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.24
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.70 – 0.88
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.76 – 0.29
+-0.70 – -0.04
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-three_year_average_of_state_poverty_rates_2015_2017
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.02
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.03
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.98 – 1.06
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.35 – 0.40
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.420
 </td>
 </tr>
 <tr>
@@ -2211,7 +2366,7 @@ three_year_average_of_state_poverty_rates_2015_2017
 pct_students_frpl
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.09
+0.08
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 -0.21
@@ -2220,7 +2375,7 @@ pct_students_frpl
 0.08 – 0.09
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.76 – 0.34
+-0.54 – 0.12
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001
@@ -2231,19 +2386,19 @@ pct_students_frpl
 state_spending_per_child
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.01
+0.99
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.04
+-0.05
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.98 – 1.05
+0.96 – 1.01
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.39 – 0.47
+-0.45 – 0.35
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.513
+0.318
 </td>
 </tr>
 <tr>
@@ -2254,16 +2409,16 @@ total_students_state_2015_16
 1.00
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.42
+0.07
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 1.00 – 1.00
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--1.34 – 2.18
+-1.59 – 1.73
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.598
+0.931
 </td>
 </tr>
 <tr>
@@ -2274,36 +2429,16 @@ full_time_equivalent_fte_teachers_state_2015_16
 1.00
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.47
+0.09
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 1.00 – 1.00
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--2.25 – 1.31
+-1.58 – 1.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.554
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-urban_percentage_of_state_population_in_2015
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.23
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.21
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.14 – 1.33
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.10 – 0.51
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001
+0.913
 </td>
 </tr>
 <tr>
@@ -2323,7 +2458,7 @@ Random Effects
 τ<sub>00</sub> <sub>hashtag</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">
-0.90
+0.97
 </td>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
@@ -2337,14 +2472,14 @@ ICC
 N <sub>hashtag</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">
-43
+44
 </td>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
 Observations
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="5">
-406517
+406746
 </td>
 </tr>
 <tr>
@@ -2352,7 +2487,7 @@ Observations
 Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">
-0.137 / 0.988
+0.147 / 0.989
 </td>
 </tr>
 </table>

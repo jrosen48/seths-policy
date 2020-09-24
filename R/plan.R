@@ -29,8 +29,4 @@ the_plan <-
       output_file = file_out("docs/analysis-multi-level-models.html"),
       params = list(d_to_model = d_to_model)),
     
-    # multi_level_models = rmarkdown::render(
-    #   knitr_in("analysis-multi-level-models.Rmd"),
-    #   output_file = file_out("docs/analysis-linear-models.html")),
-    
   )

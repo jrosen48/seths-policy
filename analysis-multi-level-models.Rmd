@@ -66,7 +66,8 @@ d_to_model %>%
   corrr::correlate() %>% 
   arrange(desc(n_tweets_by_user_in_state)) %>% 
   corrr::shave() %>% 
-  corrr::fashion() 
+  corrr::fashion() %>% 
+  knitr::kable()
 ```
 
 # Analysis - at the individual level 
@@ -79,17 +80,16 @@ m4 <- glmer(n_tweets_by_user_in_state ~ 1 +
               scale(voices) + 
               
               scale(c_ideology) + 
-              scale(g_ideology) + 
+              #scale(g_ideology) + 
               
-              three_year_average_of_state_poverty_rates_2015_2017 +
+              #three_year_average_of_state_poverty_rates_2015_2017 +
               pct_students_frpl +
               
               state_spending_per_child +
               total_students_state_2015_16 +
               
               full_time_equivalent_fte_teachers_state_2015_16 +
-              
-              scale(urban_percentage_of_state_population_in_2015) + 
+              #scale(urban_percentage_of_state_population_in_2015) + 
               
               (1|hashtag), 
             data = d_to_model,
