@@ -116,9 +116,9 @@ m1 <- glmer(n_tweets_by_user_in_state ~ 1 +
               
               pct_students_frpl +
               teacher_student_ratio + 
-              state_spending_per_child,
-            
-            (1|state), 
+              state_spending_per_child +
+              
+              (1|state), 
             data = d_user_level,
             family = "poisson")
 
@@ -141,9 +141,9 @@ m2 <- glmer(n_tweets_by_user_in_state ~ 1 +
               
               pct_students_frpl +
               teacher_student_ratio + 
-              state_spending_per_child,
-            
-            (1|state), 
+              state_spending_per_child +
+              
+              (1|state), 
             data = d_user_level,
             family = "poisson")
 

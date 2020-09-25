@@ -99,17 +99,14 @@ What stands out here for relating to `mean_n_tweets_by_user_in_state`?
 m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
                        
                        scale(voices) + 
-                       
                        scale(full_time_equivalent_fte_teachers_state_2015_16) +
                        
                        scale(c_ideology) + 
                        scale(g_ideology) + 
                        
-                       three_year_average_of_state_poverty_rates_2015_2017 +
                        pct_students_frpl +
-                       
-                       state_spending_per_child +
-                       total_students_state_2015_166,
+                       teacher_student_ratio + 
+                       state_spending_per_child,
                      data = distinct_states, 
                      family = "poisson")
 

@@ -1,80 +1,50 @@
-seth,state,,,,,,
-#aledchat,Alabama,,,,,,
-#azedchat,Arizona,,,,,,
-#arkedchat,Arkansas,,,,,,
-#caedchat,California,,,,,,
-#coedchat,Colorado,,,,,,
-#ctedchat,Connecticut,,,,,,
-#edude,Delaware,,,,,,
-#fledchat,Florida,,,,,,
-#gaed,Georgia,,,,,,
-#edchathi,Hawai’i,,,,,,
-#idedchat,Idaho,,,,,,
-#iledchat,Illinois,,,,,,
-#inelearn,Indiana,,,,,,
-#ksed,Kansas,,,,,,
-#ksedchat,Kansas,,,,,,
-#laedchat,Louisiana,,,,,,
-#edchatme,Maine,,,,,,
-#mdedchat,Maryland,,,,,,
-#edchatma,Massachusetts,,,,,,
-#miched,Michigan,,,,,,
-#mnedchat,Minnesota,,,,,,
-#msedchat,Mississippi,,,,,,
-#moedchat,Missouri,,,,,,
-#mtedchat,Montana,,,,,,
-#nebedchat,Nebraska,,,,,,
-#nved,Nevada,,,,,,
-#nvedchat,Nevada,,,,,,
-#nhed,New Hampshire,,,,,,
-#njed,New Jersey,,,,,,
-#nyedchat,New York,,,,,,
-#nced,North Carolina,,,,,,
-#ndedchat,North Dakota,,,,,,
-#ohedchat,Ohio,,,,,,
-#oklaed,Oklahoma,,,,,,
-#oredu,Oregon,,,,,,
-#paedchat,Pennsylvania,,,,,,
-#edchatri,Rhode Island,,,,,,
-#sced,South Carolina,,,,,,
-#sdedchat,South Dakota,,,,,,
-#tnedchat,Tennessee,,,,,,
-#txed,Texas,,,,,,
-#txeduchat,Texas,,,,,,
-#uted,Utah,,,,,,
-#utedchat,Utah,,,,,,
-#vachat,Virginia,,,,,,
-#wateachlead,Washington,,,,,,
-#wvedchat,West Virginia,,,,,,
-#wischat,Wisconsin,,,,,,
-#wyoedchat,Wyoming,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
-,,,,,,,
+seth,state
+#aledchat,Alabama
+#azedchat,Arizona
+#arkedchat,Arkansas
+#caedchat,California
+#coedchat,Colorado
+#ctedchat,Connecticut
+#edude,Delaware
+#fledchat,Florida
+#gaed,Georgia
+#edchathi,Hawaii
+#idedchat,Idaho
+#iledchat,Illinois
+#inelearn,Indiana
+#ksed,Kansas
+#ksedchat,Kansas
+#laedchat,Louisiana
+#edchatme,Maine
+#mdedchat,Maryland
+#edchatma,Massachusetts
+#miched,Michigan
+#mnedchat,Minnesota
+#msedchat,Mississippi
+#moedchat,Missouri
+#mtedchat,Montana
+#nebedchat,Nebraska
+#nved,Nevada
+#nvedchat,Nevada
+#nhed,New Hampshire
+#njed,New Jersey
+#nyedchat,New York
+#nced,North Carolina
+#ndedchat,North Dakota
+#ohedchat,Ohio
+#oklaed,Oklahoma
+#oredu,Oregon
+#paedchat,Pennsylvania
+#edchatri,Rhode Island
+#sced,South Carolina
+#sdedchat,South Dakota
+#tnedchat,Tennessee
+#txed,Texas
+#txeduchat,Texas
+#uted,Utah
+#utedchat,Utah
+#vachat,Virginia
+#wateachlead,Washington
+#wvedchat,West Virginia
+#wischat,Wisconsin
+#wyoedchat,Wyoming

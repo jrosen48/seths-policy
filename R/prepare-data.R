@@ -14,8 +14,7 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
     unnest(hashtags)
   
   key <- key %>% 
-    mutate(hashtags = str_sub(seth, start = 2)) %>% 
-    select(state_abbre = state, hashtags, n, voices)
+    mutate(hashtags = str_sub(seth, start = 2))
   
   # joining state-level vars
   
@@ -26,10 +25,13 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   # joining all data
   
   d_long <- d_long %>% 
+    mutate(hashtags = tolower(hashtags))
+  
+  d_long <- d_long %>% 
     left_join(key, by = "hashtags")
   
   d_long <- d_long %>% 
-    left_join(state_level_vars_combined)
+    left_join(state_level_vars_combined, by = "state")
   
   # filtering data
   
@@ -46,12 +48,12 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   # selecting only certain variables to include to make this file easier to work with 
   
   d_long <- d_long %>% 
-    select(user_id, screen_name, created_at, hashtag = hashtags, state_abbre:time_of_account)
+    select(user_id, screen_name, created_at, hashtag = hashtags, state_abbre:time_of_account, state)
   
   # filtering data to only include those from one of our 47 states (so filtering cases associated with hashtags not in the key)
   
   d_to_model <- d_long %>% 
-    filter(!is.na(state)) 
+    filter(!is.na(state))
   
   # creating new variables
   
@@ -60,8 +62,8 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
              as.integer(total_students_state_2015_16),
            state_spending_per_child = as.numeric(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) /
              as.integer(total_students_state_2015_16),
-           teacher_student_ratio = state_data$total_students_state_2015_16 / 
-             state_data$full_time_equivalent_fte_teachers_state_2015_16)
+           teacher_student_ratio = as.integer(total_students_state_2015_16) / 
+             as.integer(full_time_equivalent_fte_teachers_state_2015_16))
   
   n_tweets_at_state_level <- d_to_model %>% 
     count(state) %>% 
@@ -77,8 +79,13 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   d_to_model <- d_to_model %>% 
     left_join(n_tweets_by_user_in_state)
   
+  voices <- d_to_model %>% 
+    count(screen_name, state) %>%
+    count(state) %>% 
+    rename(voices = n)
+  
   d_to_model <- d_to_model %>% 
-    select(-n)
+    left_join(voices)
   
   d_to_model
 }
