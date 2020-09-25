@@ -114,6 +114,27 @@ sjPlot::tab_model(m_state_level, show.std = "std2")
 performance::check_model(m_state_level)
 ```
 
+Without voices
+
+```{r, state-level-models-no-voices}
+m_state_level_no_voices <- glm(n_tweets_at_state_level ~ 1 + 
+                       
+                       #scale(voices) + 
+                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
+                       
+                       scale(c_ideology) + 
+                       scale(g_ideology) + 
+                       
+                       pct_students_frpl +
+                       teacher_student_ratio + 
+                       state_spending_per_child,
+                     data = distinct_states, 
+                     family = "poisson")
+
+sjPlot::tab_model(m_state_level_no_voices, show.std = "std2")
+performance::check_model(m_state_level_no_voices)
+```
+
 What can we take away from these?
 
 **key takeaways predicting the number of tweets at the state level**

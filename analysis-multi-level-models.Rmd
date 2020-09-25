@@ -101,7 +101,7 @@ mnull <- glmer(n_tweets_by_user_in_state ~ 1 +
                family = "poisson")
 
 performance::icc(mnull)
-sjPlot::tab_model(mnull)
+sjPlot::tab_model(mnull, show.std = "std2")
 ```
 
 ```{r, model-1, eval = TRUE}
@@ -123,7 +123,7 @@ m1 <- glmer(n_tweets_by_user_in_state ~ 1 +
             family = "poisson")
 
 performance::icc(m1)
-sjPlot::tab_model(m1)
+sjPlot::tab_model(m1, show.std = "std2")
 performance::check_model(m1)
 ```
 
@@ -148,6 +148,6 @@ m2 <- glmer(n_tweets_by_user_in_state ~ 1 +
             family = "poisson")
 
 performance::icc(m2)
-sjPlot::tab_model(m2)
+sjPlot::tab_model(m2, show.std = "std2")
 performance::check_model(m2)
 ```
