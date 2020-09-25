@@ -84,14 +84,7 @@ distinct_states %>%
   knitr::kable()
 ```
 
-## Analysis
-
-What stands out here for relating to `mean_n_tweets_by_user_in_state`?
-
-- Voices (unique users) matters a great deal
-- both ideology measures (congress and governor) seem to matter, but are highly correlated (r = .79)
-- free and reduced price lunch percentage seems important
-- teacher salaries
+## Analysis - n tweets at state level
 
 ## Some linear models
 
@@ -135,13 +128,25 @@ sjPlot::tab_model(m_state_level_no_voices, show.std = "std2")
 performance::check_model(m_state_level_no_voices)
 ```
 
-What can we take away from these?
 
-**key takeaways predicting the number of tweets at the state level**
-- more voices mean more tweets
-- ideology matters a lot, with right leaning seeing greater activity
+## Analysis - users at state level
 
-**key takeaways from below**
-- ideology, poverty matter, with poorer, more right-leaning states seeing more activity
-- those who have been on Twitter longer are more active
-- states with higher unemployment see more activity
+## Some linear models
+
+```{r, state-level-models-users}
+m_state_level <- glm(voices ~ 1 + 
+                       
+                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
+                       
+                       scale(c_ideology) + 
+                       scale(g_ideology) + 
+                       
+                       pct_students_frpl +
+                       teacher_student_ratio + 
+                       state_spending_per_child,
+                     data = distinct_states, 
+                     family = "poisson")
+
+sjPlot::tab_model(m_state_level, show.std = "std2")
+performance::check_model(m_state_level)
+```
