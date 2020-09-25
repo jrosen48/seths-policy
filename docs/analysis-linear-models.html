@@ -1526,24 +1526,15 @@ div.tocify {
 <h2>Descriptives</h2>
 <pre class="r"><code>distinct_states %&gt;% 
   select(n_tweets_at_state_level,
+         n_tweets_by_user_in_state,
          voices, 
-         national_school_lunch_program_fy_2016_fns_usda_gov,
-         pct_students_frpl, 
-         state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands,
-         state_spending_per_child,
-         urban_percentage_of_state_population_in_2015,
-         three_year_average_of_state_poverty_rates_2015_2017,
-         teacher_salaries_nea_2016,
+         full_time_equivalent_fte_teachers_state_2015_16,
          c_ideology,
          g_ideology,
-         region_by_census,
-         enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
-         full_time_equivalent_fte_teachers_state_2015_16,
-         full_time_equivalent_fte_staff_state_2015_16,
          pct_students_frpl,
-         total_students_state_2015_16,
-         staff_teachers,
-         coordinators_teachers
+         teacher_student_ratio,
+         state_spending_per_child,
+         time_of_account
   ) %&gt;% 
   skimr::skim()</code></pre>
 <table>
@@ -1559,7 +1550,7 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td align="left">Number of columns</td>
-<td align="left">18</td>
+<td align="left">10</td>
 </tr>
 <tr class="even">
 <td align="left">_______________________</td>
@@ -1571,7 +1562,7 @@ div.tocify {
 </tr>
 <tr class="even">
 <td align="left">numeric</td>
-<td align="left">18</td>
+<td align="left">10</td>
 </tr>
 <tr class="odd">
 <td align="left">________________________</td>
@@ -1584,19 +1575,19 @@ div.tocify {
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table>
+<table style="width:100%;">
 <colgroup>
-<col width="42%"></col>
-<col width="5%"></col>
+<col width="34%"></col>
 <col width="7%"></col>
+<col width="9%"></col>
 <col width="6%"></col>
 <col width="6%"></col>
 <col width="5%"></col>
-<col width="5%"></col>
-<col width="5%"></col>
 <col width="6%"></col>
 <col width="6%"></col>
-<col width="3%"></col>
+<col width="6%"></col>
+<col width="7%"></col>
+<col width="4%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -1628,6 +1619,19 @@ div.tocify {
 <td align="left">▇▂▁▁▁</td>
 </tr>
 <tr class="even">
+<td align="left">n_tweets_by_user_in_state</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">32.98</td>
+<td align="right">43.12</td>
+<td align="right">1.00</td>
+<td align="right">3.00</td>
+<td align="right">28.00</td>
+<td align="right">40.00</td>
+<td align="right">262.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
 <td align="left">voices</td>
 <td align="right">0</td>
 <td align="right">1.00</td>
@@ -1638,149 +1642,6 @@ div.tocify {
 <td align="right">933.00</td>
 <td align="right">2177.00</td>
 <td align="right">12799.00</td>
-<td align="left">▇▂▁▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">national_school_lunch_program_fy_2016_fns_usda_gov</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">651149.56</td>
-<td align="right">707103.50</td>
-<td align="right">50876.06</td>
-<td align="right">237245.24</td>
-<td align="right">499790.84</td>
-<td align="right">715540.24</td>
-<td align="right">3377166.13</td>
-<td align="left">▇▂▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">pct_students_frpl</td>
-<td align="right">3</td>
-<td align="right">0.93</td>
-<td align="right">0.48</td>
-<td align="right">0.10</td>
-<td align="right">0.28</td>
-<td align="right">0.42</td>
-<td align="right">0.48</td>
-<td align="right">0.57</td>
-<td align="right">0.75</td>
-<td align="left">▂▇▅▆▁</td>
-</tr>
-<tr class="odd">
-<td align="left">state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">14521685.52</td>
-<td align="right">17284081.93</td>
-<td align="right">1473360.00</td>
-<td align="right">4556882.75</td>
-<td align="right">9412230.00</td>
-<td align="right">16339240.00</td>
-<td align="right">82153002.00</td>
-<td align="left">▇▂▁▁▁</td>
-</tr>
-<tr class="even">
-<td align="left">state_spending_per_child</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">13.14</td>
-<td align="right">3.82</td>
-<td align="right">7.19</td>
-<td align="right">10.90</td>
-<td align="right">12.51</td>
-<td align="right">15.17</td>
-<td align="right">25.07</td>
-<td align="left">▅▇▅▁▁</td>
-</tr>
-<tr class="odd">
-<td align="left">urban_percentage_of_state_population_in_2015</td>
-<td align="right">2</td>
-<td align="right">0.96</td>
-<td align="right">74.66</td>
-<td align="right">14.31</td>
-<td align="right">38.70</td>
-<td align="right">66.15</td>
-<td align="right">74.20</td>
-<td align="right">87.95</td>
-<td align="right">95.00</td>
-<td align="left">▂▃▅▅▇</td>
-</tr>
-<tr class="even">
-<td align="left">three_year_average_of_state_poverty_rates_2015_2017</td>
-<td align="right">2</td>
-<td align="right">0.96</td>
-<td align="right">12.39</td>
-<td align="right">2.79</td>
-<td align="right">6.70</td>
-<td align="right">10.65</td>
-<td align="right">12.20</td>
-<td align="right">13.90</td>
-<td align="right">20.00</td>
-<td align="left">▂▇▇▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">teacher_salaries_nea_2016</td>
-<td align="right">2</td>
-<td align="right">0.96</td>
-<td align="right">54778.67</td>
-<td align="right">9358.23</td>
-<td align="right">42025.00</td>
-<td align="right">48088.50</td>
-<td align="right">51386.00</td>
-<td align="right">57541.50</td>
-<td align="right">79152.00</td>
-<td align="left">▇▇▃▂▂</td>
-</tr>
-<tr class="even">
-<td align="left">c_ideology</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">51.13</td>
-<td align="right">16.15</td>
-<td align="right">23.98</td>
-<td align="right">41.85</td>
-<td align="right">50.53</td>
-<td align="right">60.58</td>
-<td align="right">97.00</td>
-<td align="left">▃▇▅▂▁</td>
-</tr>
-<tr class="odd">
-<td align="left">g_ideology</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">38.84</td>
-<td align="right">17.24</td>
-<td align="right">18.11</td>
-<td align="right">24.57</td>
-<td align="right">31.12</td>
-<td align="right">51.91</td>
-<td align="right">69.95</td>
-<td align="left">▇▂▃▂▃</td>
-</tr>
-<tr class="even">
-<td align="left">region_by_census</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">2.64</td>
-<td align="right">1.06</td>
-<td align="right">1.00</td>
-<td align="right">2.00</td>
-<td align="right">3.00</td>
-<td align="right">3.25</td>
-<td align="right">4.00</td>
-<td align="left">▅▆▁▇▆</td>
-</tr>
-<tr class="odd">
-<td align="left">enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">1102431.82</td>
-<td align="right">1231671.23</td>
-<td align="right">95400.00</td>
-<td align="right">427525.00</td>
-<td align="right">815850.00</td>
-<td align="right">1313500.00</td>
-<td align="right">6294600.00</td>
 <td align="left">▇▂▁▁▁</td>
 </tr>
 <tr class="even">
@@ -1797,56 +1658,82 @@ div.tocify {
 <td align="left">▇▂▁▁▁</td>
 </tr>
 <tr class="odd">
-<td align="left">full_time_equivalent_fte_staff_state_2015_16</td>
+<td align="left">c_ideology</td>
 <td align="right">1</td>
 <td align="right">0.98</td>
-<td align="right">138857.85</td>
-<td align="right">142504.19</td>
-<td align="right">17268.52</td>
-<td align="right">45081.91</td>
-<td align="right">99714.37</td>
-<td align="right">179279.80</td>
-<td align="right">690077.30</td>
-<td align="left">▇▂▁▁▁</td>
+<td align="right">51.13</td>
+<td align="right">16.15</td>
+<td align="right">23.98</td>
+<td align="right">41.85</td>
+<td align="right">50.53</td>
+<td align="right">60.58</td>
+<td align="right">97.00</td>
+<td align="left">▃▇▅▂▁</td>
 </tr>
 <tr class="even">
-<td align="left">total_students_state_2015_16</td>
+<td align="left">g_ideology</td>
 <td align="right">1</td>
 <td align="right">0.98</td>
-<td align="right">1099033.98</td>
-<td align="right">1223219.85</td>
-<td align="right">94717.00</td>
-<td align="right">429648.75</td>
-<td align="right">813958.50</td>
-<td align="right">1314903.75</td>
-<td align="right">6226737.00</td>
-<td align="left">▇▂▁▁▁</td>
+<td align="right">38.84</td>
+<td align="right">17.24</td>
+<td align="right">18.11</td>
+<td align="right">24.57</td>
+<td align="right">31.12</td>
+<td align="right">51.91</td>
+<td align="right">69.95</td>
+<td align="left">▇▂▃▂▃</td>
 </tr>
 <tr class="odd">
-<td align="left">staff_teachers</td>
-<td align="right">1</td>
-<td align="right">0.98</td>
-<td align="right">2.04</td>
-<td align="right">0.25</td>
-<td align="right">1.51</td>
-<td align="right">1.91</td>
-<td align="right">2.01</td>
-<td align="right">2.12</td>
-<td align="right">3.17</td>
-<td align="left">▂▇▂▁▁</td>
+<td align="left">pct_students_frpl</td>
+<td align="right">3</td>
+<td align="right">0.93</td>
+<td align="right">0.48</td>
+<td align="right">0.10</td>
+<td align="right">0.28</td>
+<td align="right">0.42</td>
+<td align="right">0.48</td>
+<td align="right">0.57</td>
+<td align="right">0.75</td>
+<td align="left">▂▇▅▆▁</td>
 </tr>
 <tr class="even">
-<td align="left">coordinators_teachers</td>
+<td align="left">teacher_student_ratio</td>
 <td align="right">1</td>
 <td align="right">0.98</td>
-<td align="right">0.03</td>
-<td align="right">0.02</td>
-<td align="right">0.00</td>
-<td align="right">0.01</td>
-<td align="right">0.02</td>
-<td align="right">0.03</td>
-<td align="right">0.12</td>
-<td align="left">▇▃▁▁▁</td>
+<td align="right">15.57</td>
+<td align="right">3.02</td>
+<td align="right">11.82</td>
+<td align="right">13.52</td>
+<td align="right">15.10</td>
+<td align="right">16.99</td>
+<td align="right">23.63</td>
+<td align="left">▇▇▃▁▂</td>
+</tr>
+<tr class="odd">
+<td align="left">state_spending_per_child</td>
+<td align="right">1</td>
+<td align="right">0.98</td>
+<td align="right">13.14</td>
+<td align="right">3.82</td>
+<td align="right">7.19</td>
+<td align="right">10.90</td>
+<td align="right">12.51</td>
+<td align="right">15.17</td>
+<td align="right">25.07</td>
+<td align="left">▅▇▅▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">time_of_account</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">-0.29</td>
+<td align="right">0.08</td>
+<td align="right">-0.49</td>
+<td align="right">-0.36</td>
+<td align="right">-0.29</td>
+<td align="right">-0.23</td>
+<td align="right">-0.11</td>
+<td align="left">▁▅▇▆▂</td>
 </tr>
 </tbody>
 </table>
@@ -1855,24 +1742,15 @@ div.tocify {
 <h2>Correlations</h2>
 <pre class="r"><code>distinct_states %&gt;% 
   select(n_tweets_at_state_level,
+         n_tweets_by_user_in_state,
          voices, 
-         national_school_lunch_program_fy_2016_fns_usda_gov,
-         pct_students_frpl, 
-         state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands,
-         state_spending_per_child,
-         urban_percentage_of_state_population_in_2015,
-         three_year_average_of_state_poverty_rates_2015_2017,
-         teacher_salaries_nea_2016,
+         full_time_equivalent_fte_teachers_state_2015_16,
          c_ideology,
          g_ideology,
-         region_by_census,
-         enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected,
-         full_time_equivalent_fte_teachers_state_2015_16,
-         full_time_equivalent_fte_staff_state_2015_16,
          pct_students_frpl,
-         total_students_state_2015_16,
-         staff_teachers,
-         coordinators_teachers
+         teacher_student_ratio,
+         state_spending_per_child,
+         time_of_account
   ) %&gt;% 
   corrr::correlate() %&gt;% 
   arrange(desc(n_tweets_at_state_level)) %&gt;% 
@@ -1882,49 +1760,33 @@ div.tocify {
 <pre><code>## 
 ## Correlation method: &#39;pearson&#39;
 ## Missing treated using: &#39;pairwise.complete.obs&#39;</code></pre>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="12%"></col>
-<col width="3%"></col>
-<col width="1%"></col>
-<col width="7%"></col>
+<col width="18%"></col>
+<col width="9%"></col>
+<col width="10%"></col>
 <col width="2%"></col>
-<col width="12%"></col>
-<col width="3%"></col>
-<col width="6%"></col>
-<col width="7%"></col>
-<col width="3%"></col>
-<col width="1%"></col>
-<col width="1%"></col>
-<col width="2%"></col>
-<col width="11%"></col>
-<col width="6%"></col>
-<col width="6%"></col>
+<col width="18%"></col>
 <col width="4%"></col>
-<col width="2%"></col>
-<col width="3%"></col>
+<col width="4%"></col>
+<col width="7%"></col>
+<col width="8%"></col>
+<col width="9%"></col>
+<col width="6%"></col>
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">rowname</th>
 <th align="left">n_tweets_at_state_level</th>
+<th align="left">n_tweets_by_user_in_state</th>
 <th align="left">voices</th>
-<th align="left">national_school_lunch_program_fy_2016_fns_usda_gov</th>
-<th align="left">pct_students_frpl</th>
-<th align="left">state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands</th>
-<th align="left">state_spending_per_child</th>
-<th align="left">urban_percentage_of_state_population_in_2015</th>
-<th align="left">three_year_average_of_state_poverty_rates_2015_2017</th>
-<th align="left">teacher_salaries_nea_2016</th>
+<th align="left">full_time_equivalent_fte_teachers_state_2015_16</th>
 <th align="left">c_ideology</th>
 <th align="left">g_ideology</th>
-<th align="left">region_by_census</th>
-<th align="left">enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected</th>
-<th align="left">full_time_equivalent_fte_teachers_state_2015_16</th>
-<th align="left">full_time_equivalent_fte_staff_state_2015_16</th>
-<th align="left">total_students_state_2015_16</th>
-<th align="left">staff_teachers</th>
-<th align="left">coordinators_teachers</th>
+<th align="left">pct_students_frpl</th>
+<th align="left">teacher_student_ratio</th>
+<th align="left">state_spending_per_child</th>
+<th align="left">time_of_account</th>
 </tr>
 </thead>
 <tbody>
@@ -1940,111 +1802,11 @@ div.tocify {
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">full_time_equivalent_fte_staff_state_2015_16</td>
-<td align="left">.42</td>
-<td align="left">.65</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">national_school_lunch_program_fy_2016_fns_usda_gov</td>
-<td align="left">.41</td>
-<td align="left">.64</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">full_time_equivalent_fte_teachers_state_2015_16</td>
 <td align="left">.41</td>
-<td align="left">.65</td>
-<td align="left">.98</td>
-<td align="left">.30</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">total_students_state_2015_16</td>
-<td align="left">.38</td>
-<td align="left">.61</td>
-<td align="left">.99</td>
-<td align="left">.32</td>
-<td align="left">.94</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">enrollment_in_public_ele_sec_education_digest_of_ed_stats_fall_2015_projected</td>
-<td align="left">.38</td>
-<td align="left">.61</td>
-<td align="left">.99</td>
-<td align="left">.32</td>
-<td align="left">.94</td>
-<td align="left">.02</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">-.05</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -2055,146 +1817,12 @@ div.tocify {
 <td align="left"></td>
 </tr>
 <tr class="odd">
-<td align="left">state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands</td>
-<td align="left">.30</td>
-<td align="left">.53</td>
-<td align="left">.92</td>
-<td align="left">.20</td>
-<td align="left"></td>
-<td align="left">.29</td>
-<td align="left">.47</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
 <td align="left">pct_students_frpl</td>
 <td align="left">.21</td>
-<td align="left">.24</td>
-<td align="left">.36</td>
-<td align="left"></td>
-<td align="left">.20</td>
-<td align="left">-.49</td>
-<td align="left">-.08</td>
-<td align="left">.80</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">three_year_average_of_state_poverty_rates_2015_2017</td>
-<td align="left">.09</td>
-<td align="left">.11</td>
-<td align="left">.21</td>
-<td align="left">.80</td>
-<td align="left">.07</td>
-<td align="left">-.41</td>
-<td align="left">-.32</td>
-<td align="left"></td>
-<td align="left">-.37</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">staff_teachers</td>
-<td align="left">.07</td>
-<td align="left">.06</td>
-<td align="left">.08</td>
-<td align="left">-.18</td>
-<td align="left">.06</td>
-<td align="left">.08</td>
-<td align="left">-.16</td>
-<td align="left">.01</td>
-<td align="left">.06</td>
-<td align="left">.01</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">urban_percentage_of_state_population_in_2015</td>
-<td align="left">.07</td>
-<td align="left">.16</td>
-<td align="left">.39</td>
-<td align="left">-.08</td>
-<td align="left">.47</td>
-<td align="left">.19</td>
-<td align="left"></td>
-<td align="left">-.32</td>
-<td align="left">.58</td>
-<td align="left">.50</td>
-<td align="left">.38</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">region_by_census</td>
-<td align="left">-.04</td>
-<td align="left">-.08</td>
-<td align="left">.04</td>
-<td align="left">.34</td>
-<td align="left">-.10</td>
-<td align="left">-.56</td>
-<td align="left">.06</td>
-<td align="left">.21</td>
-<td align="left">-.41</td>
-<td align="left">-.40</td>
-<td align="left">-.23</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">teacher_salaries_nea_2016</td>
 <td align="left">-.06</td>
-<td align="left">.07</td>
-<td align="left">.32</td>
-<td align="left">-.25</td>
-<td align="left">.58</td>
-<td align="left">.73</td>
-<td align="left">.58</td>
-<td align="left">-.37</td>
+<td align="left">.24</td>
 <td align="left"></td>
-<td align="left">.74</td>
-<td align="left">.67</td>
-<td align="left">-.41</td>
-<td align="left">.38</td>
+<td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -2202,21 +1830,39 @@ div.tocify {
 <td align="left"></td>
 </tr>
 <tr class="even">
-<td align="left">coordinators_teachers</td>
-<td align="left">-.13</td>
-<td align="left">-.12</td>
-<td align="left">.06</td>
-<td align="left">-.23</td>
-<td align="left">.11</td>
-<td align="left">.17</td>
-<td align="left">.24</td>
-<td align="left">-.28</td>
-<td align="left">.28</td>
-<td align="left">.24</td>
-<td align="left">.28</td>
-<td align="left">.10</td>
-<td align="left">.11</td>
-<td align="left">-.01</td>
+<td align="left">teacher_student_ratio</td>
+<td align="left">.08</td>
+<td align="left">-.04</td>
+<td align="left">.07</td>
+<td align="left">.15</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">n_tweets_by_user_in_state</td>
+<td align="left">-.00</td>
+<td align="left"></td>
+<td align="left">-.04</td>
+<td align="left">-.05</td>
+<td align="left">-.00</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">time_of_account</td>
+<td align="left">-.08</td>
+<td align="left">.12</td>
+<td align="left">-.20</td>
+<td align="left">-.36</td>
+<td align="left">.05</td>
+<td align="left">.19</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -2225,20 +1871,12 @@ div.tocify {
 <tr class="odd">
 <td align="left">state_spending_per_child</td>
 <td align="left">-.17</td>
+<td align="left">.05</td>
 <td align="left">-.09</td>
-<td align="left">-.00</td>
-<td align="left">-.49</td>
-<td align="left">.29</td>
-<td align="left"></td>
-<td align="left">.19</td>
-<td align="left">-.41</td>
-<td align="left">.73</td>
+<td align="left">.10</td>
 <td align="left">.52</td>
 <td align="left">.57</td>
-<td align="left">-.56</td>
-<td align="left">.02</td>
-<td align="left">.10</td>
-<td align="left">.09</td>
+<td align="left">-.49</td>
 <td align="left"></td>
 <td align="left"></td>
 <td align="left"></td>
@@ -2246,65 +1884,41 @@ div.tocify {
 <tr class="even">
 <td align="left">c_ideology</td>
 <td align="left">-.22</td>
+<td align="left">-.00</td>
 <td align="left">-.09</td>
-<td align="left">.13</td>
-<td align="left">-.10</td>
-<td align="left">.30</td>
-<td align="left">.52</td>
-<td align="left">.50</td>
-<td align="left">-.28</td>
-<td align="left">.74</td>
+<td align="left">.20</td>
 <td align="left"></td>
 <td align="left">.76</td>
-<td align="left">-.40</td>
-<td align="left">.17</td>
-<td align="left">.20</td>
-<td align="left">.19</td>
-<td align="left">.17</td>
+<td align="left">-.10</td>
+<td align="left">-.12</td>
 <td align="left"></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">g_ideology</td>
 <td align="left">-.25</td>
+<td align="left">-.04</td>
 <td align="left">-.17</td>
-<td align="left">.04</td>
-<td align="left">-.26</td>
-<td align="left">.28</td>
-<td align="left">.57</td>
-<td align="left">.38</td>
-<td align="left">-.43</td>
-<td align="left">.67</td>
+<td align="left">.08</td>
 <td align="left">.76</td>
 <td align="left"></td>
-<td align="left">-.23</td>
-<td align="left">.11</td>
-<td align="left">.08</td>
-<td align="left">.07</td>
-<td align="left">.11</td>
-<td align="left">-.05</td>
+<td align="left">-.26</td>
+<td align="left">-.07</td>
+<td align="left">.57</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">n_tweets_at_state_level</td>
 <td align="left"></td>
+<td align="left">-.00</td>
 <td align="left">.92</td>
 <td align="left">.41</td>
-<td align="left">.21</td>
-<td align="left">.30</td>
-<td align="left">-.17</td>
-<td align="left">.07</td>
-<td align="left">.09</td>
-<td align="left">-.06</td>
 <td align="left">-.22</td>
 <td align="left">-.25</td>
-<td align="left">-.04</td>
-<td align="left">.38</td>
-<td align="left">.41</td>
-<td align="left">.42</td>
-<td align="left">.38</td>
-<td align="left">.07</td>
-<td align="left">-.13</td>
+<td align="left">.21</td>
+<td align="left">.08</td>
+<td align="left">-.17</td>
+<td align="left">-.08</td>
 </tr>
 </tbody>
 </table>
