@@ -79,17 +79,18 @@ m_state_level <- glm(n_tweets_at_state_level ~ 1 +
                        scale(c_ideology) + 
                        scale(g_ideology) + 
                        
-                       pct_students_frpl +
-                       teacher_student_ratio + 
-                       state_spending_per_child,
+                       scale(pct_students_frpl) +
+                       scale(teacher_student_ratio) + 
+                       scale(state_spending_per_child),
                      data = distinct_states, 
                      family = "poisson")
 
-sjPlot::tab_model(m_state_level, show.std = "std2")
+sjPlot::tab_model(m_state_level, show.std = "std")
 performance::check_model(m_state_level)
+margins::margins(m_state_level)
 ```
 
-Without voices
+### Without voices - use this one
 
 ```{r, state-level-models-no-voices}
 m_state_level_no_voices <- glm(n_tweets_at_state_level ~ 1 + 
@@ -100,14 +101,15 @@ m_state_level_no_voices <- glm(n_tweets_at_state_level ~ 1 +
                        scale(c_ideology) + 
                        scale(g_ideology) + 
                        
-                       pct_students_frpl +
-                       teacher_student_ratio + 
-                       state_spending_per_child,
+                       scale(pct_students_frpl) +
+                       scale(teacher_student_ratio) + 
+                       scale(state_spending_per_child),
                      data = distinct_states, 
                      family = "poisson")
 
-sjPlot::tab_model(m_state_level_no_voices, show.std = "std2")
+sjPlot::tab_model(m_state_level_no_voices, show.std = "std")
 performance::check_model(m_state_level_no_voices)
+margins::margins(m_state_level_no_voices)
 ```
 
 
@@ -116,19 +118,20 @@ performance::check_model(m_state_level_no_voices)
 ## Some linear models
 
 ```{r, state-level-models-users}
-m_state_level <- glm(voices ~ 1 + 
+m_state_level_users <- glm(voices ~ 1 + 
                        
                        scale(full_time_equivalent_fte_teachers_state_2015_16) +
                        
                        scale(c_ideology) + 
                        scale(g_ideology) + 
                        
-                       pct_students_frpl +
-                       teacher_student_ratio + 
-                       state_spending_per_child,
+                       scale(pct_students_frpl) +
+                       scale(teacher_student_ratio) + 
+                       scale(state_spending_per_child),
                      data = distinct_states, 
                      family = "poisson")
 
-sjPlot::tab_model(m_state_level, show.std = "std2")
-performance::check_model(m_state_level)
+sjPlot::tab_model(m_state_level_users, show.std = "std")
+performance::check_model(m_state_level_users)
+margins::margins(m_state_level_users)
 ```

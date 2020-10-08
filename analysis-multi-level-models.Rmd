@@ -101,7 +101,7 @@ mnull <- glmer(n_tweets_by_user_in_state ~ 1 +
                family = "poisson")
 
 performance::icc(mnull)
-sjPlot::tab_model(mnull, show.std = "std2")
+sjPlot::tab_model(mnull, show.std = "std")
 ```
 
 ```{r, model-1, eval = TRUE}
@@ -114,17 +114,18 @@ m1 <- glmer(n_tweets_by_user_in_state ~ 1 +
               scale(c_ideology) + 
               scale(g_ideology) + 
               
-              pct_students_frpl +
-              teacher_student_ratio + 
-              state_spending_per_child +
+              scale(pct_students_frpl) +
+              scale(teacher_student_ratio) + 
+              scale(state_spending_per_child) + 
               
               (1|state), 
             data = d_user_level,
             family = "poisson")
 
 performance::icc(m1)
-sjPlot::tab_model(m1, show.std = "std2")
+sjPlot::tab_model(m1, show.std = "std")
 performance::check_model(m1)
+#margins::margins(m1)
 ```
 
 Without voices
@@ -139,15 +140,16 @@ m2 <- glmer(n_tweets_by_user_in_state ~ 1 +
               scale(c_ideology) + 
               scale(g_ideology) + 
               
-              pct_students_frpl +
-              teacher_student_ratio + 
-              state_spending_per_child +
+              scale(pct_students_frpl) +
+              scale(teacher_student_ratio) + 
+              scale(state_spending_per_child) + 
               
               (1|state), 
             data = d_user_level,
             family = "poisson")
 
 performance::icc(m2)
-sjPlot::tab_model(m2, show.std = "std2")
+sjPlot::tab_model(m2, show.std = "std")
 performance::check_model(m2)
+#margins::margins(m2)
 ```

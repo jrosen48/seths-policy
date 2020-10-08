@@ -1,10 +1,16 @@
-prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_data) {
+prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_data, nces_data_1415) {
   
   new_state_level_vars <- new_state_level_vars %>% 
     mutate(state = tolower(state),
            state = tools::toTitleCase(state))
   
   nces_data <- nces_data %>% 
+    mutate(state = tolower(state_name),
+           state = tools::toTitleCase(state)) %>% 
+    select(-state_name) %>% 
+    select(state, everything())
+  
+  nces_data_1415 <- nces_data_1415 %>% 
     mutate(state = tolower(state_name),
            state = tools::toTitleCase(state)) %>% 
     select(-state_name) %>% 
@@ -20,7 +26,8 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   
   state_level_vars_combined <- state_level_vars %>% 
     left_join(new_state_level_vars, by = "state") %>% 
-    left_join(nces_data)
+    left_join(nces_data) %>% 
+    left_join(nces_data_1415)
   
   # joining all data
   
@@ -60,6 +67,9 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   d_to_model <- d_to_model %>%
     mutate(pct_students_frpl = as.integer(free_and_reduced_lunch_students_public_school_2015_16) / 
              as.integer(total_students_state_2015_16),
+           pct_students_frpl = ifelse(is.na(pct_students_frpl), 
+                                      as.integer(free_and_reduced_lunch_students_public_school_2014_15) / 
+                                        as.integer(total_students_state_2014_15), pct_students_frpl),
            state_spending_per_child = as.numeric(state_spending_on_public_elementary_secondary_spending_fy_2016_census_in_thousands) /
              as.integer(total_students_state_2015_16),
            teacher_student_ratio = as.integer(total_students_state_2015_16) / 
