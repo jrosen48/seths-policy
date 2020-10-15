@@ -90,6 +90,8 @@ d_user_level$g_ideology_std <- as.vector(scale(d_user_level$g_ideology))
 d_user_level$teacher_student_ratio_std <- as.vector(scale(d_user_level$teacher_student_ratio))
 
 d_user_level$state_spending_per_child_std <- as.vector(scale(d_user_level$state_spending_per_child))
+
+d_user_level$time_of_account_std <- as.vector(scale(d_user_level$time_of_account))
 ```
 
 ```{r, model-null, eval = TRUE}
@@ -122,16 +124,16 @@ sjPlot::tab_model(mnull, show.std = "std")
 ```{r, model-1, eval = TRUE}
 m1 <- glmer(n_tweets_by_user_in_state ~ 1 + 
               
-              scale(time_of_account) +
-              scale(voices) + 
-              scale(full_time_equivalent_fte_teachers_state_2015_16) +
-              
-              scale(c_ideology) + 
-              scale(g_ideology) + 
-              
-              scale(pct_students_frpl) +
-              scale(teacher_student_ratio) + 
-              scale(state_spending_per_child) + 
+                       time_of_account_std +
+                       voices_std + 
+                       full_time_equivalent_fte_teachers_state_2015_16_std +
+                       
+                       c_ideology_std + 
+                       g_ideology_std + 
+                       
+                       pct_students_frpl_std + 
+                       teacher_student_ratio_std + 
+                       state_spending_per_child_std +
               
               (1|state), 
             data = d_user_level,
@@ -148,16 +150,16 @@ Without voices
 ```{r, model-2, eval = TRUE}
 m2 <- glmer(n_tweets_by_user_in_state ~ 1 + 
               
-              scale(time_of_account) +
-              #scale(voices) + 
-              scale(full_time_equivalent_fte_teachers_state_2015_16) +
-              
-              scale(c_ideology) + 
-              scale(g_ideology) + 
-              
-              scale(pct_students_frpl) +
-              scale(teacher_student_ratio) + 
-              scale(state_spending_per_child) + 
+                       time_of_account_std +
+                       voices_std + 
+                       full_time_equivalent_fte_teachers_state_2015_16_std +
+                       
+                       c_ideology_std + 
+                       g_ideology_std + 
+                       
+                       pct_students_frpl_std + 
+                       teacher_student_ratio_std + 
+                       state_spending_per_child_std +
               
               (1|state), 
             data = d_user_level,

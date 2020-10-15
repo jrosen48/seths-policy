@@ -90,8 +90,8 @@ distinct_states$state_spending_per_child_std <- as.vector(scale(distinct_states$
 
 m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
                        
-                       voices + 
-                       full_time_equivalent_fte_teachers_state_2015_16 +
+                       voices_std + 
+                       full_time_equivalent_fte_teachers_state_2015_16_std +
                        
                        c_ideology_std + 
                        g_ideology_std + 
@@ -112,8 +112,8 @@ margins::margins(m_state_level)
 ```{r, state-level-models-no-voices}
 m_state_level_no_voices <- glm(n_tweets_at_state_level ~ 1 + 
                        
-                       #voices + 
-                       full_time_equivalent_fte_teachers_state_2015_16 +
+                       # voices_std + 
+                       full_time_equivalent_fte_teachers_state_2015_16_std +
                        
                        c_ideology_std + 
                        g_ideology_std + 
