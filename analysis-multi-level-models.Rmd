@@ -77,6 +77,21 @@ d_user_level <- d_to_model %>%
 
 # Analysis - at the individual level 
 
+```{r, std-vars}
+d_user_level$pct_students_frpl_std <- as.vector(scale(d_user_level$pct_students_frpl * 100))
+d_user_level$voices_std <- as.vector(scale(d_user_level$voices))
+
+d_user_level$full_time_equivalent_fte_teachers_state_2015_16_std <- as.vector(scale(d_user_level$full_time_equivalent_fte_teachers_state_2015_16))
+
+d_user_level$c_ideology_std <- as.vector(scale(d_user_level$c_ideology))
+
+d_user_level$g_ideology_std <- as.vector(scale(d_user_level$g_ideology))
+
+d_user_level$teacher_student_ratio_std <- as.vector(scale(d_user_level$teacher_student_ratio))
+
+d_user_level$state_spending_per_child_std <- as.vector(scale(d_user_level$state_spending_per_child))
+```
+
 ```{r, model-null, eval = TRUE}
 mnull <- glmer(n_tweets_by_user_in_state ~ 1 + 
                  

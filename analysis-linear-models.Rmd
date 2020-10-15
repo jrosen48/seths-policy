@@ -70,18 +70,35 @@ distinct_states %>%
 
 ## Some linear models
 
-```{r, state-level-models}
+```{r, std-vars}
+distinct_states$pct_students_frpl_std <- as.vector(scale(distinct_states$pct_students_frpl * 100))
+distinct_states$voices_std <- as.vector(scale(distinct_states$voices))
+
+distinct_states$full_time_equivalent_fte_teachers_state_2015_16_std <- as.vector(scale(distinct_states$full_time_equivalent_fte_teachers_state_2015_16))
+
+distinct_states$c_ideology_std <- as.vector(scale(distinct_states$c_ideology))
+
+distinct_states$g_ideology_std <- as.vector(scale(distinct_states$g_ideology))
+
+distinct_states$teacher_student_ratio_std <- as.vector(scale(distinct_states$teacher_student_ratio))
+
+distinct_states$state_spending_per_child_std <- as.vector(scale(distinct_states$state_spending_per_child))
+```
+
+
+```{r,state-level-models}
+
 m_state_level <- glm(n_tweets_at_state_level ~ 1 + 
                        
-                       scale(voices) + 
-                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
+                       voices + 
+                       full_time_equivalent_fte_teachers_state_2015_16 +
                        
-                       scale(c_ideology) + 
-                       scale(g_ideology) + 
+                       c_ideology_std + 
+                       g_ideology_std + 
                        
-                       scale(pct_students_frpl) +
-                       scale(teacher_student_ratio) + 
-                       scale(state_spending_per_child),
+                       pct_students_frpl_std + 
+                       teacher_student_ratio_std + 
+                       state_spending_per_child_std,
                      data = distinct_states, 
                      family = "poisson")
 
@@ -95,43 +112,19 @@ margins::margins(m_state_level)
 ```{r, state-level-models-no-voices}
 m_state_level_no_voices <- glm(n_tweets_at_state_level ~ 1 + 
                        
-                       #scale(voices) + 
-                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
+                       #voices + 
+                       full_time_equivalent_fte_teachers_state_2015_16 +
                        
-                       scale(c_ideology) + 
-                       scale(g_ideology) + 
+                       c_ideology_std + 
+                       g_ideology_std + 
                        
-                       scale(pct_students_frpl) +
-                       scale(teacher_student_ratio) + 
-                       scale(state_spending_per_child),
+                       pct_students_frpl_std + 
+                       teacher_student_ratio_std + 
+                       state_spending_per_child_std,
                      data = distinct_states, 
                      family = "poisson")
 
 sjPlot::tab_model(m_state_level_no_voices, show.std = "std")
 performance::check_model(m_state_level_no_voices)
 margins::margins(m_state_level_no_voices)
-```
-
-
-## Analysis - users at state level
-
-## Some linear models
-
-```{r, state-level-models-users}
-m_state_level_users <- glm(voices ~ 1 + 
-                       
-                       scale(full_time_equivalent_fte_teachers_state_2015_16) +
-                       
-                       scale(c_ideology) + 
-                       scale(g_ideology) + 
-                       
-                       scale(pct_students_frpl) +
-                       scale(teacher_student_ratio) + 
-                       scale(state_spending_per_child),
-                     data = distinct_states, 
-                     family = "poisson")
-
-sjPlot::tab_model(m_state_level_users, show.std = "std")
-performance::check_model(m_state_level_users)
-margins::margins(m_state_level_users)
 ```
