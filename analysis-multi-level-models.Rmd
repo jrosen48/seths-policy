@@ -142,7 +142,7 @@ m1 <- glmer(n_tweets_by_user_in_state ~ 1 +
 performance::icc(m1)
 sjPlot::tab_model(m1, show.std = "std")
 performance::check_model(m1)
-#margins::margins(m1)
+margins::margins(m1)
 ```
 
 Without voices
@@ -168,5 +168,5 @@ m2 <- glmer(n_tweets_by_user_in_state ~ 1 +
 performance::icc(m2)
 sjPlot::tab_model(m2, show.std = "std")
 performance::check_model(m2)
-#margins::margins(m2)
+margins::margins(m2)
 ```
