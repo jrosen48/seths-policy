@@ -151,7 +151,6 @@ Without voices
 m2 <- glmer(n_tweets_by_user_in_state ~ 1 + 
               
                        time_of_account_std +
-                       voices_std + 
                        full_time_equivalent_fte_teachers_state_2015_16_std +
                        
                        c_ideology_std + 
