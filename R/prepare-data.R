@@ -32,7 +32,7 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   # joining all data
   
   d_long <- d_long %>% 
-    mutate(hashtags = tolower(hashtags))
+    mutate(hashtags = tolower(hashtags)) %>% 
   
   d_long <- d_long %>% 
     left_join(key, by = "hashtags")

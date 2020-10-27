@@ -5,6 +5,10 @@ the_plan <-
       janitor::clean_names() %>% 
       as_tibble(),
     
+    user_vars = read_rds(file_in("data-raw/account_created.rds")) %>% 
+      janitor::clean_names() %>% 
+      as_tibble(),
+    
     key = read_csv(file_in("data-raw/summary_data.csv")) %>% 
       janitor::clean_names(),
     
