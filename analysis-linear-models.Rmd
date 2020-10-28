@@ -23,7 +23,7 @@ d_to_model <- params$d_to_model
 ```{r}
 distinct_states <- d_to_model %>% 
   distinct(state, .keep_all = TRUE) %>% 
-  select(-user_id, -screen_name, -created_at)
+  select(-user_id, -screen_name)
 ```
 
 ## Descriptives
