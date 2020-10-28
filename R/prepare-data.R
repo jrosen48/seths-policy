@@ -1,4 +1,4 @@
-prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_data, nces_data_1415) {
+prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_data, nces_data_1415, account_created) {
   
   new_state_level_vars <- new_state_level_vars %>% 
     mutate(state = tolower(state),
@@ -32,13 +32,16 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   # joining all data
   
   d_long <- d_long %>% 
-    mutate(hashtags = tolower(hashtags)) %>% 
+    mutate(hashtags = tolower(hashtags)) 
   
   d_long <- d_long %>% 
     left_join(key, by = "hashtags")
   
   d_long <- d_long %>% 
     left_join(state_level_vars_combined, by = "state")
+  
+  d_long <- d_long %>% 
+    left_join(account_created, by = "user_id")
   
   # filtering data
   
@@ -50,12 +53,12 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   
   d_long <- d_long %>% 
     mutate(time_of_account = 
-             lubridate::time_length(lubridate::interval(created_at, lubridate::ymd("2016-01-01")), "years"))
+             lubridate::time_length(lubridate::interval(account_created_at, lubridate::ymd("2016-01-01")), "years"))
   
   # selecting only certain variables to include to make this file easier to work with 
   
   d_long <- d_long %>% 
-    select(user_id, screen_name, created_at, hashtag = hashtags, state_abbre:time_of_account, state)
+    select(user_id, screen_name, account_created_at, hashtag = hashtags, state_abbre:time_of_account, state)
   
   # filtering data to only include those from one of our 47 states (so filtering cases associated with hashtags not in the key)
   
