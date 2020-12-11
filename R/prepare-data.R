@@ -19,6 +19,12 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   d_long <- d %>% 
     unnest(hashtags)
   
+  d_long <- d_long %>% 
+    mutate(hashtags = tolower(hashtags)) 
+  
+  d_long <- d_long %>%
+    distinct(status_id, hashtags, .keep_all = TRUE)
+  
   key <- key %>% 
     mutate(hashtags = str_sub(seth, start = 2))
   
@@ -30,9 +36,6 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
     left_join(nces_data_1415)
   
   # joining all data
-  
-  d_long <- d_long %>% 
-    mutate(hashtags = tolower(hashtags)) 
   
   d_long <- d_long %>% 
     left_join(key, by = "hashtags")
@@ -58,7 +61,7 @@ prepare_data <- function(d, key, state_level_vars, new_state_level_vars, nces_da
   # selecting only certain variables to include to make this file easier to work with 
   
   d_long <- d_long %>% 
-    select(user_id, screen_name, account_created_at, hashtag = hashtags, state_abbre:time_of_account, state)
+    select(status_id, user_id, screen_name, account_created_at, hashtag = hashtags, state_abbre:time_of_account, state)
   
   # filtering data to only include those from one of our 47 states (so filtering cases associated with hashtags not in the key)
   
